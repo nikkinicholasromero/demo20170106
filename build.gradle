@@ -1,0 +1,46 @@
+group 'ph.com.nikkinicholas'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'gs-spring-boot'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile ("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile 'org.springframework.boot:spring-boot-starter-jetty'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+    compile 'com.zaxxer:HikariCP:2.5.1'
+    compile 'mysql:mysql-connector-java'
+    compile 'org.hibernate:hibernate-java8'
+    compile 'org.flywaydb:flyway-core:4.0.3'
+
+    testCompile 'junit:junit'
+}

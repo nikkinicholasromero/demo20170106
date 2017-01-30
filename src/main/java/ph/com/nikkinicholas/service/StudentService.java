@@ -28,6 +28,7 @@ public class StudentService {
     }
 
     public void create(Student student) {
+        student.setId(UUID.randomUUID().toString());
         studentRepository.save(student);
     }
 

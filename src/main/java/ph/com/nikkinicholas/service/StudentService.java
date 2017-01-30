@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ph.com.nikkinicholas.domain.Student;
 import ph.com.nikkinicholas.repository.StudentRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,11 +17,13 @@ public class StudentService {
     private StudentRepository studentRepository;
 
     public Student selectOne(String id) {
-        return studentRepository.findById(id);
+        return studentRepository.findOne(id);
     }
 
     public List<Student> selectAll() {
-        return studentRepository.findAll();
+        List<Student> students = new ArrayList<>();
+        studentRepository.findAll().forEach(students::add);
+        return students;
     }
 
     public void create(Student student) {

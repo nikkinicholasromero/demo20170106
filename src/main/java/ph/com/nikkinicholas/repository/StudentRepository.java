@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import ph.com.nikkinicholas.domain.Student;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 /**
  * Created by nikkiromero on 16/01/2017.
@@ -13,6 +12,4 @@ import java.util.List;
 @Repository
 @Transactional
 public interface StudentRepository extends CrudRepository<Student, String> {
-    Student findById(String id);
-    List<Student> findAll();
 }

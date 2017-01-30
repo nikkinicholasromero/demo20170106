@@ -1,10 +1,12 @@
-package ph.com.nikkinicholas.aspect.monitor.controller;
+package ph.com.nikkinicholas.aspect.monitor;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,26 +14,28 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class StudentControllerMonitor {
+public class LoggingMonitor {
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     @Before("execution(* ph.com.nikkinicholas..*.*(..))")
     public void logBefore(JoinPoint joinPoint) {
         System.out.println("Before (Signature) : " + joinPoint.getSignature());
         Object[] args = joinPoint.getArgs();
         for(int i = 0; i < args.length; i++) {
-            System.out.println("Before (Param) : " + args[i].toString());
+            log.info("Before (Param) : " + args[i].toString());
         }
     }
 
     @AfterReturning(value = "execution(* ph.com.nikkinicholas..*.*(..))", returning = "returnValue")
     public void logAfterReturning(JoinPoint joinPoint, Object returnValue) {
-        System.out.println("After Returning (Signature) : " + joinPoint.getSignature());
-        System.out.println("After Returning (Return Value) : " + (returnValue != null ? returnValue.toString() : null));
+        log.info("After Returning (Signature) : " + joinPoint.getSignature());
+        log.info("After Returning (Return Value) : " + (returnValue != null ? returnValue.toString() : null));
     }
 
     @AfterThrowing(value = "execution(* ph.com.nikkinicholas..*.*(..))", throwing = "exception")
     public void logAfterThrowing(JoinPoint joinPoint, Exception exception) {
-        System.out.println("After Throwing (Signature) : " + joinPoint.getSignature());
-        System.out.println("After Throwing (Exception Class) : " + exception.getClass());
-        System.out.println("After Throwing (Exception Message) : " + exception.getMessage());
+        log.info("After Throwing (Signature) : " + joinPoint.getSignature());
+        log.info("After Throwing (Exception Class) : " + exception.getClass());
+        log.info("After Throwing (Exception Message) : " + exception.getMessage());
     }
 }

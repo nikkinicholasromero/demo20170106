@@ -7,6 +7,7 @@ import ph.com.nikkinicholas.repository.StudentRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by nikkiromero on 16/01/2017.
@@ -16,11 +17,11 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public Student selectOne(String id) {
+    public Student findOne(String id) {
         return studentRepository.findOne(id);
     }
 
-    public List<Student> selectAll() {
+    public List<Student> findAll() {
         List<Student> students = new ArrayList<>();
         studentRepository.findAll().forEach(students::add);
         return students;

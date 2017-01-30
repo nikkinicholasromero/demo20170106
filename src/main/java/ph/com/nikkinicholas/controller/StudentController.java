@@ -17,13 +17,13 @@ public class StudentController {
     private StudentService studentService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Student selectOne(@PathVariable("id") String id) {
-        return studentService.selectOne(id);
+    public Student findOne(@PathVariable("id") String id) {
+        return studentService.findOne(id);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<Student> selectAll() {
-        return studentService.selectAll();
+    public List<Student> findAll() {
+        return studentService.findAll();
     }
 
     @RequestMapping(value = "/", method = RequestMethod.PUT)

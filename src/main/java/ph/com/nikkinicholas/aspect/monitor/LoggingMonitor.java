@@ -19,7 +19,7 @@ public class LoggingMonitor {
 
     @Before("execution(* ph.com.nikkinicholas..*.*(..))")
     public void logBefore(JoinPoint joinPoint) {
-        System.out.println("Before (Signature) : " + joinPoint.getSignature());
+        log.info("Before (Signature) : " + joinPoint.getSignature());
         Object[] args = joinPoint.getArgs();
         for(int i = 0; i < args.length; i++) {
             log.info("Before (Param) : " + args[i].toString());
